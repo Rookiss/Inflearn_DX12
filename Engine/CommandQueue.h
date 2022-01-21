@@ -3,21 +3,19 @@
 class SwapChain;
 class DescriptorHeap;
 
-// 외주 일감 목록(?)
-// - 텅 비면 GPU가 논다
-// - 꽉 차면 CPU가 논다
 class CommandQueue
 {
 public:
 	~CommandQueue();
 
-	void Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain, shared_ptr<DescriptorHeap> descHeap);
+	void Init(ComPtr<ID3D12Device> device, shared_ptr<SwapChain> swapChain);
 	void WaitSync();
 
 	void RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect);
 	void RenderEnd();
 
 	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
+	ComPtr<ID3D12GraphicsCommandList> GetCmdList() { return	_cmdList; }
 
 private:
 	// CommandQueue : DX12에 등장
@@ -34,6 +32,5 @@ private:
 	HANDLE								_fenceEvent = INVALID_HANDLE_VALUE;
 
 	shared_ptr<SwapChain>		_swapChain;
-	shared_ptr<DescriptorHeap>	_descHeap;
 };
 

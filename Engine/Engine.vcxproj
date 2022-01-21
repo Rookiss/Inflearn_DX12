@@ -132,6 +132,9 @@
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -151,30 +154,43 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommandQueue.h" />
     <ClInclude Include="d3dx12.h" />
-    <ClInclude Include="DescriptorHeap.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EnginePch.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RootSignature.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="SwapChain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandQueue.cpp" />
-    <ClCompile Include="DescriptorHeap.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EnginePch.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RootSignature.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Resources\Shader\default.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS_Main</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VS_Main</EntryPointName>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

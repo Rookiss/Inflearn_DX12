@@ -6,6 +6,7 @@
 #include "RootSignature.h"
 #include "Mesh.h"
 #include "Shader.h"
+#include "ConstantBuffer.h"
 
 class Engine
 {
@@ -19,6 +20,8 @@ public:
 	shared_ptr<CommandQueue> GetCmdQueue() { return _cmdQueue; }
 	shared_ptr<SwapChain> GetSwapChain() { return _swapChain; }
 	shared_ptr<RootSignature> GetRootSignature() { return _rootSignature; }
+	shared_ptr<ConstantBuffer> GetCB() { return _cb; }
+
 public:
 	void RenderBegin();
 	void RenderEnd();
@@ -35,5 +38,6 @@ private:
 	shared_ptr<CommandQueue> _cmdQueue;
 	shared_ptr<SwapChain> _swapChain;
 	shared_ptr<RootSignature> _rootSignature;
+	shared_ptr<ConstantBuffer> _cb;
 };
 

@@ -45,6 +45,9 @@
     <ClInclude Include="RootSignature.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -72,6 +75,9 @@
       <Filter>Resource</Filter>
     </ClCompile>
     <ClCompile Include="RootSignature.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>

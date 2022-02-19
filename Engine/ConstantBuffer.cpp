@@ -17,8 +17,10 @@ ConstantBuffer::~ConstantBuffer()
 	}
 }
 
-void ConstantBuffer::Init(uint32 size, uint32 count)
+void ConstantBuffer::Init(CBV_REGISTER reg, uint32 size, uint32 count)
 {
+	_reg = reg;
+
 	// 상수 버퍼는 256 바이트 배수로 만들어야 한다
 	// 0 256 512 768
 	_elementSize = (size + 255) & ~255;
@@ -46,7 +48,6 @@ void ConstantBuffer::CreateBuffer()
 	// We do not need to unmap until we are done with the resource.  However, we must not write to
 	// the resource while it is in use by the GPU (so we must use synchronization techniques).
 }
-
 
 void ConstantBuffer::CreateView()
 {
@@ -76,17 +77,17 @@ void ConstantBuffer::Clear()
 	_currentIndex = 0;
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE ConstantBuffer::PushData(int32 rootParamIndex, void* buffer, uint32 size)
+void ConstantBuffer::PushData(void* buffer, uint32 size)
 {
-	assert(_currentIndex < _elementSize);
+	assert(_currentIndex < _elementCount);
+	assert(_elementSize == ((size + 255) & ~255));
 
 	::memcpy(&_mappedBuffer[_currentIndex * _elementSize], buffer, size);
 
 	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = GetCpuHandle(_currentIndex);
+	GEngine->GetTableDescHeap()->SetCBV(cpuHandle, _reg);
 
 	_currentIndex++;
-
-	return cpuHandle;
 }
 
 D3D12_GPU_VIRTUAL_ADDRESS ConstantBuffer::GetGpuVirtualAddress(uint32 index)

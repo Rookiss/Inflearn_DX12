@@ -45,7 +45,7 @@ VS_OUT VS_Main(VS_IN input)
     VS_OUT output = (VS_OUT)0;
 
     output.pos = float4(input.pos, 1.f);
-    output.pos += offset0;
+    //output.pos += offset0;
     output.pos.x += float_0;
     output.pos.y += float_1;
     output.pos.z += float_2;

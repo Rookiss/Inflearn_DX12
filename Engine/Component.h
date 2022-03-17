@@ -1,4 +1,5 @@
 #pragma once
+#include "Object.h"
 
 enum class COMPONENT_TYPE : uint8
 {
@@ -18,7 +19,7 @@ enum
 class GameObject;
 class Transform;
 
-class Component
+class Component : public Object
 {
 public:
 	Component(COMPONENT_TYPE type);
